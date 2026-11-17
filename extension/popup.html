@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Remote Browser Bridge</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <header>
+      <div class="mark">RB</div>
+      <div>
+        <h1>Remote Browser Bridge</h1>
+        <p>仅连接你授权的控制服务</p>
+      </div>
+    </header>
+
+    <div id="status" class="status disconnected" role="status">未连接</div>
+
+    <section class="session-panel" aria-labelledby="sessionTitle">
+      <div class="session-heading">
+        <div>
+          <h2 id="sessionTitle">浏览器会话授权</h2>
+          <p>默认网站范围，30 分钟，空闲 5 分钟自动失效</p>
+        </div>
+        <span id="sessionBadge" class="session-badge off">未授权</span>
+      </div>
+
+      <div id="pendingSession" class="pending hidden">
+        <strong>远端请求访问</strong>
+        <p id="pendingRequestText"></p>
+        <div class="session-actions">
+          <button id="approvePending" class="primary" type="button">授权本次请求</button>
+          <button id="denyPending" type="button">拒绝</button>
+        </div>
+      </div>
+
+      <div id="activeSession" class="active-session hidden">
+        <p><strong id="activeScope"></strong></p>
+        <p id="activeOrigin" class="mono"></p>
+        <p id="activeExpiry"></p>
+        <button id="revokeSession" class="danger" type="button">立即停止会话</button>
+      </div>
+
+      <div id="sessionControls">
+        <div class="session-grid">
+          <label>
+            <span>授权范围</span>
+            <select id="sessionScope">
+              <option value="origin">当前网站</option>
+              <option value="page">仅当前页面</option>
+              <option value="all">所有网站（高级）</option>
+            </select>
+          </label>
+          <label>
+            <span>有效时长</span>
+            <select id="sessionDuration">
+              <option value="15">15 分钟</option>
+              <option value="30" selected>30 分钟</option>
+              <option value="60">60 分钟</option>
+              <option value="120">120 分钟</option>
+            </select>
+          </label>
+        </div>
+        <button id="grantSession" class="session-grant" type="button">授权当前浏览器会话</button>
+      </div>
+    </section>
+
+    <form id="settings">
+      <label>
+        <span>WebSocket 地址</span>
+        <input id="serverUrl" type="url" autocomplete="off" required>
+      </label>
+      <label>
+        <span>配对 Token</span>
+        <input id="token" type="password" autocomplete="off" required>
+      </label>
+      <label>
+        <span>设备名称</span>
+        <input id="deviceName" type="text" maxlength="100" autocomplete="off" required>
+      </label>
+      <label class="check">
+        <input id="autoConnect" type="checkbox">
+        <span>浏览器启动后自动连接</span>
+      </label>
+      <div class="actions">
+        <button id="connect" class="primary" type="submit">保存并连接</button>
+        <button id="disconnect" type="button">断开</button>
+      </div>
+    </form>
+
+    <footer>
+      <span id="deviceId"></span>
+      <a id="dashboard" href="#" target="_blank" rel="noreferrer">打开控制台</a>
+    </footer>
+    <script src="popup.js"></script>
+  </body>
+</html>

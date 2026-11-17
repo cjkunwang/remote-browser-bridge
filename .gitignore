@@ -1,0 +1,8 @@
+node_modules/
+data/
+data/pairing.json
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store

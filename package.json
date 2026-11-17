@@ -1,0 +1,19 @@
+{
+  "name": "remote-browser-bridge",
+  "version": "0.2.1",
+  "private": true,
+  "type": "module",
+  "description": "A private Chrome extension and relay for remotely controlling authorized browser tabs.",
+  "scripts": {
+    "start": "node server/index.mjs",
+    "remote:info": "bash scripts/show-remote-info.sh",
+    "check": "node --check server/index.mjs && node --check server/bridge.mjs && node --check server/protocol.mjs && node --check extension/background.js && node --check extension/popup.js && node --check server/public/app.js",
+    "test": "pnpm check && node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "ws": "^8.18.3"
+  }
+}

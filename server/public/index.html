@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Remote Browser Bridge</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">RB</div>
+        <div>
+          <h1>Remote Browser Bridge</h1>
+          <p>受控浏览器远程操作台</p>
+        </div>
+      </div>
+      <div id="serverStatus" class="server-status">未认证</div>
+    </header>
+
+    <main>
+      <section id="authPanel" class="panel auth-panel">
+        <div>
+          <span class="eyebrow">PRIVATE CONSOLE</span>
+          <h2>连接控制服务</h2>
+          <p>输入服务启动时的配对 Token。Token 只保存在当前浏览器会话。</p>
+        </div>
+        <form id="authForm" class="auth-form">
+          <label for="token">配对 Token</label>
+          <div class="input-action">
+            <input id="token" type="password" autocomplete="off" placeholder="粘贴 BRIDGE_TOKEN">
+            <button class="primary" type="submit">连接</button>
+          </div>
+        </form>
+      </section>
+
+      <div id="workspace" class="workspace hidden">
+        <aside class="panel devices-panel">
+          <div class="panel-heading">
+            <div>
+              <span class="eyebrow">DEVICES</span>
+              <h2>已连接浏览器</h2>
+            </div>
+            <button id="refreshDevices" class="icon-button" type="button" title="刷新设备">↻</button>
+          </div>
+          <div id="devices" class="devices"></div>
+          <button id="logout" class="text-button" type="button">清除会话 Token</button>
+        </aside>
+
+        <section class="panel control-panel">
+          <div class="panel-heading">
+            <div>
+              <span class="eyebrow">COMMAND</span>
+              <h2>执行浏览器命令</h2>
+            </div>
+            <span id="targetDevice" class="target">未选择设备</span>
+          </div>
+
+          <div class="quick-actions" aria-label="常用命令">
+            <button data-action="tab.list" type="button">列出标签页</button>
+            <button data-action="tab.open" type="button">打开网页</button>
+            <button data-action="tab.close" type="button">关闭标签页</button>
+            <button data-action="tab.screenshot" type="button">截取页面</button>
+            <button data-action="page.text" type="button">读取文本</button>
+          </div>
+
+          <form id="commandForm" class="command-form">
+            <label for="action">动作</label>
+            <select id="action" name="action">
+              <option value="session.status">session.status</option>
+              <option value="tab.list">tab.list</option>
+              <option value="tab.open">tab.open</option>
+              <option value="tab.navigate">tab.navigate</option>
+              <option value="tab.close">tab.close</option>
+              <option value="tab.activate">tab.activate</option>
+              <option value="tab.screenshot">tab.screenshot</option>
+              <option value="window.open">window.open</option>
+              <option value="window.close">window.close</option>
+              <option value="page.click">page.click</option>
+              <option value="page.type">page.type</option>
+              <option value="page.text">page.text</option>
+              <option value="page.waitForSelector">page.waitForSelector</option>
+              <option value="page.scroll">page.scroll</option>
+            </select>
+
+            <label for="payload">Payload JSON</label>
+            <textarea id="payload" name="payload" spellcheck="false">{
+  "url": "https://example.com"
+}</textarea>
+
+            <div class="command-footer">
+              <span>只允许白名单动作，密码输入框默认禁止写入。</span>
+              <button id="runCommand" class="primary" type="submit">执行命令</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="panel result-panel">
+          <div class="panel-heading">
+            <div>
+              <span class="eyebrow">EVIDENCE</span>
+              <h2>执行结果</h2>
+            </div>
+            <button id="clearOutput" class="text-button" type="button">清空</button>
+          </div>
+          <div id="output" class="output" aria-live="polite">
+            <p class="empty">等待执行命令。</p>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

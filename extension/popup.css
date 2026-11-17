@@ -1,0 +1,45 @@
+:root {
+  color-scheme: light;
+  font: 13px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #172033;
+  background: #f4f6fb;
+}
+
+* { box-sizing: border-box; }
+body { width: 380px; margin: 0; background: #f4f6fb; }
+header { display: flex; gap: 12px; align-items: center; padding: 18px 18px 12px; }
+.mark { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 12px; color: white; background: linear-gradient(135deg, #2268e8, #6a4ce8); font-weight: 800; }
+h1 { margin: 0; font-size: 16px; }
+header p { margin: 2px 0 0; color: #667085; }
+.status { margin: 0 18px 14px; padding: 9px 11px; border-radius: 9px; background: #e9edf5; color: #475467; }
+.status.ready { background: #d9f7e7; color: #087443; }
+.status.error, .status.needs_pairing { background: #fee4e2; color: #b42318; }
+.status.connecting { background: #fff3cd; color: #8a6100; }
+form { display: grid; gap: 12px; padding: 0 18px 16px; }
+label { display: grid; gap: 5px; color: #344054; font-weight: 600; }
+input[type="text"], input[type="url"], input[type="password"] { width: 100%; border: 1px solid #cdd5e1; border-radius: 8px; padding: 9px 10px; background: white; font: inherit; color: inherit; outline: none; }
+input:focus { border-color: #2268e8; box-shadow: 0 0 0 3px #dbe7ff; }
+.check { display: flex; align-items: center; gap: 8px; font-weight: 500; }
+.check input { margin: 0; }
+.actions { display: flex; gap: 8px; }
+button { flex: 1; border: 1px solid #cdd5e1; border-radius: 8px; padding: 9px 12px; background: white; color: #344054; font: inherit; font-weight: 650; cursor: pointer; }
+button.primary { border-color: #2268e8; background: #2268e8; color: white; }
+button:disabled { cursor: wait; opacity: .65; }
+footer { display: grid; gap: 4px; border-top: 1px solid #e3e8f0; padding: 11px 18px 14px; color: #667085; font-size: 11px; word-break: break-all; }
+a { color: #175cd3; text-decoration: none; }
+.session-panel { margin: 0 18px 16px; border: 1px solid #d8e0eb; border-radius: 12px; padding: 13px; background: white; }
+.session-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+.session-heading h2 { margin: 0; font-size: 14px; }
+.session-heading p { margin: 3px 0 0; color: #667085; font-size: 11px; }
+.session-badge { flex: none; border-radius: 999px; padding: 4px 7px; background: #e9edf5; color: #667085; font-size: 10px; font-weight: 750; }
+.session-badge.on { background: #d9f7e7; color: #087443; }
+.session-badge.pending { background: #fff1d6; color: #8a6100; }
+.hidden { display: none !important; }
+.session-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-top: 11px; }
+select { width: 100%; border: 1px solid #cdd5e1; border-radius: 8px; padding: 8px 9px; background: white; font: inherit; color: inherit; }
+.session-grant { width: 100%; margin-top: 9px; border-color: #2268e8; background: #edf4ff; color: #175cd3; }
+.active-session, .pending { margin-top: 11px; border-radius: 9px; padding: 10px; background: #f7f9fc; }
+.active-session p, .pending p { margin: 3px 0; color: #475467; }
+.session-actions { display: flex; gap: 7px; margin-top: 9px; }
+.mono { word-break: break-all; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; }
+button.danger { width: 100%; margin-top: 8px; border-color: #f1a8a1; background: #fff4f3; color: #b42318; }
